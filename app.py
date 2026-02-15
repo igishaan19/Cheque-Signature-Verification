@@ -53,7 +53,9 @@ if st.button("Start Verification"):
 
             model = joblib.load("models/signature_model.pkl")
             prediction = model.predict(features)[0]
-            st.image(signature, caption="Extracted Signature", use_container_width=True)
+            signature_rgb = cv2.cvtColor(signature, cv2.COLOR_BGR2RGB)
+            st.image(signature_rgb, caption="Extracted Signature", use_container_width=True)
+
 
             if prediction == 1:
                 st.success("Prediction: Genuine Signature")
