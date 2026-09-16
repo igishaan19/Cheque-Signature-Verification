@@ -10,11 +10,10 @@ from skimage.filters import threshold_otsu   # For finding the threshold for gra
 
 def rgbgrey(img):
     # Converts rgb to grayscale
-    greyimg = np.zeros((img.shape[0], img.shape[1]))
-    for row in range(len(img)):
-        for col in range(len(img[row])):
-            greyimg[row][col] = np.average(img[row][col])
-    return greyimg
+    img = np.asarray(img)
+    if img.ndim == 2:
+        return img.astype(float)
+    return np.mean(img[..., :3], axis=2)
 
 
 def greybin(img):

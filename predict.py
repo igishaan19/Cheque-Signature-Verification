@@ -7,6 +7,7 @@ from sklearn.svm import LinearSVC
 import pickle
 import imagehash
 import os
+import streamlit as st
 
 import preproc
 import features
@@ -48,6 +49,7 @@ def extract_features(image_path):
         print(f"Error extracting features: {e}")
         return None, None, False
 
+@st.cache_resource(show_spinner=False)
 def load_model_components():
     """Load the pre-trained model, vocabulary, and scaler."""
     if not (os.path.exists('model.pkl') and os.path.exists('voc.pkl') and os.path.exists('scaler.pkl')):
